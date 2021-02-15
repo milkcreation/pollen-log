@@ -8,6 +8,7 @@ use BadMethodCallException;
 use Pollen\Support\Concerns\ConfigBagTrait;
 use Pollen\Support\Concerns\ContainerAwareTrait;
 use Psr\Container\ContainerInterface as Container;
+use RuntimeException;
 use Throwable;
 
 /**
@@ -72,13 +73,17 @@ class LogManager implements LogManagerInterface
     /**
      * @inheritDoc
      */
-    public function channel(string $name = null): ?LoggerInterface
+    public function channel(string $name = null): LoggerInterface
     {
         if ($name === null) {
             return $this->getDefault();
         }
 
-        return $this->channels[$name] ?? null;
+        if (!isset($this->channels[$name])) {
+            return $this->channels[$name];
+        }
+
+        throw new RuntimeException(sprintf('Log Channel [%s] unresolvable', $name));
     }
 
     /**
@@ -121,86 +126,5 @@ class LogManager implements LogManagerInterface
         $this->default = $default;
 
         return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function alert($message, array $context = []): void
-    {
-        $this->getDefault()->alert($message, $context);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function critical($message, array $context = []): void
-    {
-        $this->getDefault()->critical($message, $context);
-    }
-
-
-    /**
-     * @inheritDoc
-     */
-    public function debug($message, array $context = []): void
-    {
-        $this->getDefault()->debug($message, $context);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function emergency($message, array $context = []): void
-    {
-        $this->getDefault()->emergency($message, $context);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function error($message, array $context = []): void
-    {
-        $this->getDefault()->error($message, $context);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function info($message, array $context = []): void
-    {
-        $this->getDefault()->info($message, $context);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function log($level, $message, array $context = []): void
-    {
-        $this->getDefault()->log($level, $message, $context);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function notice($message, array $context = []): void
-    {
-        $this->getDefault()->notice($message, $context);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function success(string $message, array $context = []): void
-    {
-        $this->getDefault()->success($message, $context);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function warning($message, array $context = []): void
-    {
-        $this->getDefault()->warning($message, $context);
     }
 }

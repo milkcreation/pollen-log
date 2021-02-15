@@ -7,7 +7,7 @@ namespace Pollen\Log;
 /**
  * @mixin Logger
  */
-interface LogManagerInterface extends LoggerInterface
+interface LogManagerInterface
 {
     /**
      * Délégation d'appel des méthodes du canal de journalisation par défaut.
@@ -33,9 +33,9 @@ interface LogManagerInterface extends LoggerInterface
      *
      * @param string|null $name
      *
-     * @return LoggerInterface|null
+     * @return LoggerInterface
      */
-    public function channel(string $name = null): ?LoggerInterface;
+    public function channel(string $name = null): LoggerInterface;
 
     /**
      * Récupération du canal de journalisation par défaut.
