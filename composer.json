@@ -9,7 +9,7 @@
     "logging",
     "PSR-3"
   ],
-  "time": "2021-02-15",
+  "time": "2021-02-18",
   "license": "MIT",
   "authors": [
     {
@@ -29,7 +29,6 @@
     "composer/composer": "^2.0",
     "composer/installers": "~1.0",
     "monolog/monolog": "^2.2",
-    "pollen-solutions/container": "^1.0",
     "pollen-solutions/support": "^1.0"
   },
   "require-dev": {
@@ -44,6 +43,9 @@
     "psr-4": {
       "Pollen\\Log\\Test\\": "tests"
     }
+  },
+  "suggest": {
+    "pollen-solutions/container" : "Pollen Container Component - PSR-11 ready Dependencies Injection Container"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
