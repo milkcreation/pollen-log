@@ -56,7 +56,15 @@ class Logger extends BaseLogger implements LoggerInterface
     }
 
     /**
-     * Conversion de niveau de journalisation PSR-3.
+     * @inheritDoc
+     */
+    public function success(string $message, array $context = []): void
+    {
+        $this->addRecord(self::SUCCESS, $message, $context);
+    }
+
+    /**
+     * Conversion d'un niveau de journalisation au format PSR-3.
      * {@internal Hack en vue de la validation du niveau success}
      *
      * @param string|int $level
@@ -92,13 +100,5 @@ class Logger extends BaseLogger implements LoggerInterface
         }
 
         return $level;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function success(string $message, array $context = []): void
-    {
-        $this->addRecord(self::SUCCESS, $message, $context);
     }
 }
