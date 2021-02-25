@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Pollen\Log;
 
 use BadMethodCallException;
-use Pollen\Support\Concerns\ConfigBagTrait;
+use Pollen\Support\Concerns\ConfigBagAwareTrait;
 use Pollen\Support\Concerns\ContainerAwareTrait;
 use Psr\Container\ContainerInterface as Container;
 use RuntimeException;
@@ -16,7 +16,7 @@ use Throwable;
  */
 class LogManager implements LogManagerInterface
 {
-    use ConfigBagTrait;
+    use ConfigBagAwareTrait;
     use ContainerAwareTrait;
 
     /**
