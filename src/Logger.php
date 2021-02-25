@@ -7,14 +7,14 @@ namespace Pollen\Log;
 use Monolog\Handler\HandlerInterface;
 use Monolog\Logger as BaseLogger;
 use Pollen\Support\Concerns\ContainerAwareTrait;
-use Pollen\Support\Concerns\ParamsBagTrait;
+use Pollen\Support\Concerns\ParamsBagAwareTrait;
 use Psr\Log\InvalidArgumentException;
 
 class Logger extends BaseLogger implements LoggerInterface
 {
     use ContainerAwareTrait;
     use LoggerDefaultHandlersTrait;
-    use ParamsBagTrait;
+    use ParamsBagAwareTrait;
 
     /**
      * @var int
