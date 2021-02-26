@@ -4,21 +4,14 @@ declare(strict_types=1);
 
 namespace Pollen\Log;
 
+use Pollen\Support\Concerns\ConfigBagAwareTraitInterface;
+use Pollen\Support\Proxy\ContainerProxyInterface;
+
 /**
  * @mixin Logger
  */
-interface LogManagerInterface
+interface LogManagerInterface extends ConfigBagAwareTraitInterface, ContainerProxyInterface
 {
-    /**
-     * Délégation d'appel des méthodes du canal de journalisation par défaut.
-     *
-     * @param string $method
-     * @param array $arguments
-     *
-     * @return mixed
-     */
-    public function __call(string $method, array $arguments);
-
     /**
      * Ajout d'un canal de journalisation.
      *

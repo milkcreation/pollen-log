@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Pollen\Log;
 
 use BadMethodCallException;
+use Exception;
 use Pollen\Support\Concerns\ConfigBagAwareTrait;
-use Pollen\Support\Concerns\ContainerAwareTrait;
+use Pollen\Support\Proxy\ContainerProxy;
 use Psr\Container\ContainerInterface as Container;
 use RuntimeException;
 use Throwable;
@@ -17,7 +18,7 @@ use Throwable;
 class LogManager implements LogManagerInterface
 {
     use ConfigBagAwareTrait;
-    use ContainerAwareTrait;
+    use ContainerProxy;
 
     /**
      * @var LoggerInterface
@@ -43,19 +44,28 @@ class LogManager implements LogManagerInterface
     }
 
     /**
-     * @inheritDoc
+     * Délégation d'appel des méthodes du canal de journalisation par défaut.
+     *
+     * @param string $method
+     * @param array $arguments
+     *
+     * @return mixed
+     *
+     * @throws Exception
      */
     public function __call(string $method, array $arguments)
     {
         try {
             return $this->getDefault()->{$method}(...$arguments);
+        } catch (Exception $e) {
+            throw $e;
         } catch (Throwable $e) {
             throw new BadMethodCallException(
                 sprintf(
                     'Default Logger method call [%s] throws an exception: %s',
                     $method,
                     $e->getMessage()
-                )
+                ), 0, $e
             );
         }
     }
