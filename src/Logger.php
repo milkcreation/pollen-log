@@ -6,13 +6,13 @@ namespace Pollen\Log;
 
 use Monolog\Handler\HandlerInterface;
 use Monolog\Logger as BaseLogger;
-use Pollen\Support\Concerns\ContainerAwareTrait;
 use Pollen\Support\Concerns\ParamsBagAwareTrait;
+use Pollen\Support\Proxy\ContainerProxy;
 use Psr\Log\InvalidArgumentException;
 
 class Logger extends BaseLogger implements LoggerInterface
 {
-    use ContainerAwareTrait;
+    use ContainerProxy;
     use LoggerDefaultHandlersTrait;
     use ParamsBagAwareTrait;
 

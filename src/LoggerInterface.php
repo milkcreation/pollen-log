@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Pollen\Log;
 
+use Pollen\Support\Proxy\ContainerProxyInterface;
 use Psr\Log\LoggerInterface as BaseLoggerInterface;
+use Pollen\Support\Concerns\ParamsBagAwareTraitInterface;
 
 /**
  * @mixin \Monolog\Logger
  */
-interface LoggerInterface extends BaseLoggerInterface
+interface LoggerInterface extends BaseLoggerInterface, ContainerProxyInterface, ParamsBagAwareTraitInterface
 {
     /**
      * Alias de création d'un message de succès.
