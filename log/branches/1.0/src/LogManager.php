@@ -21,6 +21,13 @@ class LogManager implements LogManagerInterface
     use ContainerProxy;
 
     /**
+     * Instance principale.
+     * @var static|null
+     */
+    private static $instance;
+
+
+    /**
      * @var LoggerInterface
      */
     protected $default;
@@ -41,6 +48,19 @@ class LogManager implements LogManagerInterface
         if ($container !== null) {
             $this->setContainer($container);
         }
+    }
+
+    /**
+     * Récupération de l'instance principale.
+     *
+     * @return static
+     */
+    public static function getInstance(): LogManagerInterface
+    {
+        if (self::$instance instanceof self) {
+            return self::$instance;
+        }
+        throw new RuntimeException(sprintf('Unavailable [%s] instance', __CLASS__));
     }
 
     /**
@@ -117,7 +137,8 @@ class LogManager implements LogManagerInterface
      */
     public function registerChannel(string $name, array $params = []): ?LoggerInterface
     {
-        $channel = (new Logger($name))->setParams($params);
+        $channel = new Logger($name);
+        $channel->setParams($params);
 
         if ($container = $this->getContainer()) {
             $channel->setContainer($container);
