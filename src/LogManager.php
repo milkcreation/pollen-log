@@ -7,6 +7,7 @@ namespace Pollen\Log;
 use BadMethodCallException;
 use Exception;
 use Pollen\Support\Concerns\ConfigBagAwareTrait;
+use Pollen\Support\Exception\ManagerRuntimeException;
 use Pollen\Support\Proxy\ContainerProxy;
 use Psr\Container\ContainerInterface as Container;
 use RuntimeException;
@@ -60,7 +61,7 @@ class LogManager implements LogManagerInterface
         if (self::$instance instanceof self) {
             return self::$instance;
         }
-        throw new RuntimeException(sprintf('Unavailable [%s] instance', __CLASS__));
+        throw new ManagerRuntimeException(sprintf('Unavailable [%s] instance', __CLASS__));
     }
 
     /**
