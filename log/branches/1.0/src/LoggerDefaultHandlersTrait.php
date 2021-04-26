@@ -30,7 +30,7 @@ trait LoggerDefaultHandlersTrait
                 )
             );
 
-            static::setTimezone($this->params('timezone', DateTime::getGlobalTimeZone()));
+            static::setTimezone($this->params('timezone', (new DateTime())->getTimezone()));
 
             $this->pushHandler($defaultHandler);
         } else {
