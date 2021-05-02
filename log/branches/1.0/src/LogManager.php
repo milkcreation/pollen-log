@@ -104,7 +104,7 @@ class LogManager implements LogManagerInterface
     /**
      * @inheritDoc
      */
-    public function channel(string $name = null): LoggerInterface
+    public function channel(?string $name = null): LoggerInterface
     {
         if ($name === null) {
             return $this->getDefault();

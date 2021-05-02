@@ -28,7 +28,7 @@ interface LogManagerInterface extends ConfigBagAwareTraitInterface, ContainerPro
      *
      * @return LoggerInterface
      */
-    public function channel(string $name = null): LoggerInterface;
+    public function channel(?string $name = null): LoggerInterface;
 
     /**
      * Récupération du canal de journalisation par défaut.
