@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Pollen\Log;
 
-use Pollen\Container\BaseServiceProvider;
+use Pollen\Container\BootableServiceProvider;
 
-class LogServiceProvider extends BaseServiceProvider
+class LogServiceProvider extends BootableServiceProvider
 {
     protected $provides = [
         LogManagerInterface::class
